@@ -28,6 +28,36 @@ int main() {
                  "Mario" + std::__cxx11::to_string(i)) << std::endl;   // true (1)
 
 	std::cout << nw.addUser("yoshi", "Yoshi") << std::endl;     // false (0)
+	
+	
+	Network bw;
+    // add three users
+    bw.addUser("mario", "Mario");
+    bw.addUser("luigi", "Luigi");
+    bw.addUser("yoshi", "Yoshi");
+
+    // make them follow each other
+    bw.follow("mario", "luigi");
+    bw.follow("mario", "yoshi");
+    bw.follow("luigi", "mario");
+    bw.follow("luigi", "yoshi");
+    bw.follow("yoshi", "mario");
+    bw.follow("yoshi", "luigi");
+
+    // add a user who does not follow others
+    bw.addUser("wario", "Wario");
+    
+    // add clone users who follow @mario
+    for(int i = 2; i < 6; i++) {
+        std::string usrn = "mario" + std::__cxx11::to_string(i);
+        std::string dspn = "Mario " + std::__cxx11::to_string(i);
+        bw.addUser(usrn, dspn);
+        bw.follow(usrn, "mario");
+    }
+    // additionally, make @mario2 follow @luigi
+    bw.follow("mario2", "luigi");
+
+    bw.printDot();
   
 
 }

@@ -48,5 +48,17 @@ TEST_CASE("addUser && numUsers"){
 	CHECK(myNetwork.addUser("Darth Sidious", "Sheev Palpatine")==false);
 	CHECK(myNetwork.getNumUsers()==3);
 }
-  
+
+TEST_CASE("follow"){
+	Network bw;
+    bw.addUser("mario", "Mario");
+    bw.addUser("luigi", "Luigi");
+	CHECK(bw.isFollowing(0,1)==false);
+	CHECK(bw.isFollowing(1,0)==false);
+	CHECK(bw.follow("mario","luigi")==true);
+	//CHECKS INDEX OF FOLLOWING ARRAY
+	//SHOULD BE THE SAME ON BOTH ENDS (A->B and B->A)
+	CHECK(bw.isFollowing(0,1)==true);
+	CHECK(bw.isFollowing(1,0)==true);
+}
 
