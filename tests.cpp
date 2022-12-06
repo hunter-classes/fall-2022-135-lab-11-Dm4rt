@@ -2,6 +2,7 @@
 #include <iostream>
 #include "doctest.h"
 #include "profile.h"
+#include "network.h"
 
 TEST_CASE("getUsername"){
 	Profile p1("marco", "Marco");        
@@ -33,6 +34,19 @@ TEST_CASE("constructors"){
 	CHECK(p2.getUsername()=="");
 	CHECK(p1.getFullName()=="displayname (@Marco)");
 	CHECK(p2.getFullName()=="displayname (@)");
+}
+
+TEST_CASE("addUser && numUsers"){
+	Network myNetwork;
+	CHECK(myNetwork.addUser("Skywalker101", "Luke Skywalker")==true);
+	CHECK(myNetwork.getNumUsers()==1);
+	CHECK(myNetwork.addUser("OBKenobi", "Obi Wan Kenobi")==true);
+	CHECK(myNetwork.getNumUsers()==2);
+	CHECK(myNetwork.addUser("SkywalkerOG", "Anakin Skywalker")==true);
+	CHECK(myNetwork.getNumUsers()==3);
+	//THE space should not be allowed in username
+	CHECK(myNetwork.addUser("Darth Sidious", "Sheev Palpatine")==false);
+	CHECK(myNetwork.getNumUsers()==3);
 }
   
 
